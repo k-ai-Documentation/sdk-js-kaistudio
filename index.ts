@@ -8,16 +8,6 @@ export interface KaiStudioCredentials {
     host?: any
 }
 
-export enum State {
-    INITIAL_SAVED = 'INITIAL_SAVED',
-    UPDATED = "UPDATED",
-    ON_CONTENT_EXTRACT = 'ON_CONTENT_EXTRACT',
-    CONTENT_EXTRACTED = 'CONTENT_EXTRACTED',
-    ON_INDEXATION = 'ON_INDEXATION',
-    INDEXED = 'INDEXED',
-    PARSING_ERROR = 'PARSING_ERROR'
-}
-
 export class KaiStudio {
 
     private readonly credentials: KaiStudioCredentials;

@@ -10,17 +10,18 @@ export class ManageInstance {
 
     /**
      * Initializes the ManageInstance class.
-     * 
+     *
      * @param {object} headers - HTTP headers to include in API requests.
      */
     constructor(headers: object) {
         this.headers = headers;
-        this.baseUrl = "https://ima.kai-studio.ai";
+
+        this.baseUrl = import.meta.env.VITE_APP_OMA_URL ?? "https://ima.kai-studio.ai";
     }
 
     /**
      * Generates a new API key.
-     * 
+     *
      * @returns {Promise<boolean>} True if the key is successfully generated.
      */
     public async generateNewApiKey(): Promise<boolean> {
@@ -38,7 +39,7 @@ export class ManageInstance {
 
     /**
      * Updates the instance name.
-     * 
+     *
      * @param {string} name - New name for the instance.
      * @returns {Promise<boolean>} True if the name update is successful.
      */
@@ -58,7 +59,7 @@ export class ManageInstance {
 
     /**
      * Deploys the instance.
-     * 
+     *
      * @returns {Promise<boolean>} True if deployment is successful.
      */
     public async deploy(): Promise<boolean> {
@@ -76,7 +77,7 @@ export class ManageInstance {
 
     /**
      * Deletes the instance.
-     * 
+     *
      * @returns {Promise<boolean>} True if deletion is successful.
      */
     public async delete(): Promise<boolean> {
@@ -94,7 +95,7 @@ export class ManageInstance {
 
     /**
      * Adds a new knowledge base (KB) entry.
-     * 
+     *
      * @param {string} type - Type of knowledge base entry.
      * @param {any} options - Additional options for the KB entry.
      * @param {any} searchGoal - Search goal associated with the KB entry.
@@ -116,7 +117,7 @@ export class ManageInstance {
 
     /**
      * Sets the playground configuration.
-     * 
+     *
      * @param {string[]} typeList - List of KB types to configure for the playground.
      * @returns {Promise<boolean>} True if configuration is successful.
      */
@@ -136,7 +137,7 @@ export class ManageInstance {
 
     /**
      * Updates an existing knowledge base (KB) entry.
-     * 
+     *
      * @param {string} id - ID of the KB entry to update.
      * @param {any} options - Updated options for the KB entry.
      * @param {any} searchGoal - Updated search goal for the KB entry.
@@ -158,7 +159,7 @@ export class ManageInstance {
 
     /**
      * Removes a knowledge base (KB) entry.
-     * 
+     *
      * @param {string} id - ID of the KB entry to remove.
      * @returns {Promise<boolean>} True if KB removal is successful.
      */

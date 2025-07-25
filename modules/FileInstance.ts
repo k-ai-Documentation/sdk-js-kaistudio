@@ -29,26 +29,28 @@ export interface KaiStudioFileUploadResponse {
  */
 export class FileInstance {
     private readonly headers: object;
+    private readonly baseUrl: string;
 
     /**
      * Creates an instance of FileInstance.
-     * 
+     *
      * @param {object} headers - The HTTP headers to include in requests.
      */
     constructor(headers: object) {
         this.headers = headers;
+        this.baseUrl = import.meta.env.VITE_APP_FMA_URL ?? "https://fma.kai-studio.ai"
     }
 
     /**
      * Retrieves a list of available files in Kai Studio.
-     * 
+     *
      * @returns {Promise<KaiStudioFileSignature[]>} A list of file signatures.
      * @throws {Error} Throws an error if the request fails.
      */
     public async listFiles(): Promise<KaiStudioFileSignature[]> {
         try {
             const request = await axios({
-                url: 'https://fma.kai-studio.ai/list-files',
+                url: `${this.baseUrl}/list-files`,
                 method: 'POST',
                 headers: this.headers
             });
@@ -60,7 +62,7 @@ export class FileInstance {
 
     /**
      * Downloads a file by its name.
-     * 
+     *
      * @param {string} fileName - The name of the file to download.
      * @returns {Promise<KaiStudioFileSignature[]>} The downloaded file data.
      * @throws {Error} Throws an error if the request fails.
@@ -68,7 +70,7 @@ export class FileInstance {
     public async downloadFile(fileName: string): Promise<KaiStudioFileSignature[]> {
         try {
             const request = await axios({
-                url: 'https://fma.kai-studio.ai/download-file',
+                url: `${this.baseUrl}/download-file`,
                 method: 'POST',
                 headers: this.headers,
                 data: {
@@ -83,7 +85,7 @@ export class FileInstance {
 
     /**
      * Uploads one or more files to Kai Studio.
-     * 
+     *
      * @param {File[]} files - The list of files to upload.
      * @returns {Promise<KaiStudioFileUploadResponse[]>} The response indicating success or failure for each file.
      * @throws {Error} Throws an error if the request fails.
@@ -97,7 +99,7 @@ export class FileInstance {
             for (let i = 0; i < files.length; i++) {
                 formData.append(`files`, files[i]);
             }
-            const request = await axios.post('https://fma.kai-studio.ai/upload-file', formData, {
+            const request = await axios.post(`${this.baseUrl}/upload-file`, formData, {
                 headers: {
                     ...this.headers,
                     "Content-Type": "multipart/form-data; charset=utf-8",
@@ -111,7 +113,7 @@ export class FileInstance {
 
     /**
      * Deletes a file by its name.
-     * 
+     *
      * @param {string} fileName - The name of the file to delete.
      * @returns {Promise<boolean>} `true` if the file was successfully deleted, otherwise `false`.
      * @throws {Error} Throws an error if the request fails.
@@ -119,7 +121,7 @@ export class FileInstance {
     public async removeFile(fileName: string): Promise<boolean> {
         try {
             const request = await axios({
-                url: 'https://fma.kai-studio.ai/delete-file',
+                url: `${this.baseUrl}/delete-file`,
                 method: 'POST',
                 headers: this.headers,
                 data: {

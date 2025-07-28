@@ -16,7 +16,7 @@ export class ManageInstance {
     constructor(headers: object) {
         this.headers = headers;
 
-        this.baseUrl = import.meta.env.VITE_APP_OMA_URL ?? "https://ima.kai-studio.ai";
+        this.baseUrl = import.meta.env.VITE_APP_IMA_URL ?? "https://ima.kai-studio.ai";
     }
 
     /**
